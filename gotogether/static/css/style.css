@@ -1,0 +1,63 @@
+:root{
+  --bg:#181818;
+  --panel:#2b2b2b;
+  --card:#3a3a3a;
+  --accent1:#b15cff;
+  --accent2:#ff4fd8;
+  --text:#f4f2f8;
+  --muted:#bdb7c7;
+}
+*{box-sizing:border-box;font-family:'Outfit',sans-serif;color:var(--text)}
+h1,h2,h3,.title{font-family:'Bebas Neue',sans-serif}
+body{margin:0;background:var(--bg);min-height:100vh}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:transparent;border-bottom:1px solid rgba(255,255,255,0.03)}
+.brand{display:flex;align-items:center;gap:12px}
+.logo-left{width:72px;height:44px}
+.brand-text{display:flex;flex-direction:column}
+.title{font-size:20px}
+.subtitle{font-size:11px;color:var(--muted);margin-top:2px}
+.right-top{display:flex;align-items:center;gap:12px}
+.clock{background:linear-gradient(90deg,var(--accent1),var(--accent2));padding:8px 12px;border-radius:10px;font-weight:600;color:#fff}
+.container{max-width:1100px;margin:24px auto;padding:0 18px}
+.splash{display:flex;align-items:center;justify-content:center;height:78vh}
+.splash-logo{width:220px;filter:drop-shadow(0 8px 30px rgba(177,92,255,0.12));animation:pop 1.6s ease}
+@keyframes pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.05);opacity:1}100%{transform:scale(1)}}
+.menu{display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:center;padding:28px;border-radius:12px}
+.menu-left{display:flex;align-items:center;justify-content:center}
+.menu-logo{width:160px;border-radius:8px}
+.menu-right{padding:12px}
+.menu-title{font-size:28px;margin-bottom:8px}
+.vertical-actions{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.big-btn{padding:14px 18px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;text-decoration:none;display:inline-block;text-align:center}
+.big-btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+.form-wrap{max-width:760px;margin:0 auto;padding:22px;border-radius:12px;background:var(--panel)}
+label{display:block;margin:10px 0 6px;color:var(--muted)}
+input[type="text"],input[type="email"],input[type="time"],input[type="file"]{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:var(--card);color:var(--text)}
+.form-actions{display:flex;gap:10px;margin-top:12px}
+.btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));padding:10px 12px;border-radius:10px;border:none;color:#fff;cursor:pointer}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.005));padding:14px;border-radius:12px}
+.back{display:inline-block;margin-bottom:10px;color:var(--muted);text-decoration:none}
+.home-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.muted{color:var(--muted)}
+.carousel{position:relative;display:flex;align-items:center;margin-top:12px}
+.carousel-track{display:flex;gap:14px;overflow:hidden;padding:10px;scroll-behavior:smooth}
+.slide{min-width:300px;flex:0 0 300px;border-radius:12px;padding:12px;background:var(--card);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.02)}
+.slide-top{display:flex;gap:12px;align-items:center}
+.avatar{width:72px;height:72px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--accent2),var(--accent1));font-weight:700;color:#fff}
+.avatar.small{width:56px;height:56px;border-radius:8px}
+.slide .info h3{margin:0}
+.slide-actions{margin-top:12px;display:flex;gap:8px}
+.carousel-btn{background:transparent;border:none;color:var(--text);font-size:26px;padding:12px;cursor:pointer}
+.carousel-btn:hover{color:var(--accent2)}
+#notifications{margin-top:18px}
+.notify{background:linear-gradient(90deg,rgba(177,92,255,0.12),rgba(255,79,216,0.08));padding:12px;border-radius:10px;margin-bottom:8px;color:#fff}
+.trips-list{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.trip-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--card);border-radius:10px}
+.trip-body{flex:1}
+.trip-actions{display:flex;gap:8px}
+.directory .grid{display:flex;gap:18px}
+.profile{padding:10px}
+.flash-area{max-width:980px;margin:8px auto}
+.flash{padding:10px;border-radius:10px;margin:6px 0}
+.flash.success{background:linear-gradient(90deg,rgba(75,107,255,0.12),rgba(142,45,226,0.08));color:#DFF1FF'}

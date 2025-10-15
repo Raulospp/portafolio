@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directorio - GoTogether</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #1e1e1e, #2a2a2a);
+      color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #252525;
+      padding: 15px 25px;
+      border-bottom: 2px solid #6a4cff;
+    }
+
+    header h1 {
+      color: #6a4cff;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      background-color: #2c2c2c;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.8em;
+      color: #ff80f7;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #444;
+      padding-bottom: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #3a3a3a, #2d2d2d);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(106,76,255,0.6);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(106,76,255,0.1) 0%, transparent 70%);
+      transform: rotate(45deg);
+      transition: 0.6s;
+      opacity: 0;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .name {
+      font-size: 1.2em;
+      color: #fff;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .status {
+      font-size: 0.9em;
+      margin: 6px 0;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .status.disponible { background-color: #32cd32; }
+    .status.ocupado { background-color: #ff4500; }
+    .status.enruta { background-color: #1e90ff; }
+
+    .info {
+      font-size: 0.9em;
+      color: #d0d0d0;
+      margin-top: 6px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #6a4cff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.85em;
+      margin-top: 8px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #7a5eff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      color: #aaa;
+      font-size: 0.85em;
+      margin-top: 50px;
+      border-top: 1px solid #444;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🚘 Directorio GoTogether</h1>
+    <a href="{{ url_for('menu') }}" class="btn">Volver</a>
+  </header>
+
+  <div class="container">
+    <h2 class="section-title">Conductores</h2>
+    <div class="grid">
+      {% for c in conductores %}
+      <div class="card">
+        <div class="name">{{ c.name }}</div>
+        <div class="status {{ c.status|lower|replace(' ', '') }}">{{ c.status }}</div>
+        <div class="info">{{ c.model }} - {{ c.plate }}</div>
+        <div class="info">{{ c.route }}</div>
+        <div class="info"><b>{{ c.city }}</b></div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <h2 class="section-title" style="margin-top:40px;">Pasajeros</h2>
+    <div class="grid">
+      {% for p in pasajeros %}
+      <div class="card">
+        <div class="name">{{ p.name }}</div>
+        <div class="status {{ p.status|lower|replace(' ', '') }}">{{ p.status }}</div>
+        <div class="info">{{ p.university }}</div>
+        <div class="info">{{ p.destination }} - {{ p.time }}</div>
+        <div class="info">{{ p.neighborhood }}, <b>{{ p.city }}</b></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <footer>
+    © 2025 GoTogether — Conectando viajes universitarios de manera segura y ecológica.
+  </footer>
+</body>
+</html>

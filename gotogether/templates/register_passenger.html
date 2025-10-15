@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="form-wrap card">
+  <a class="back" href="{{ url_for('menu') }}">← Volver al inicio</a>
+  <h2>Registro — Pasajero</h2>
+  <form method="post" enctype="multipart/form-data">
+    <label>Nombre completo</label>
+    <input name="name" required placeholder="Tu nombre completo">
+    <label>Correo institucional</label>
+    <input name="email" type="email" required placeholder="ejemplo@universidad.edu">
+    <label>Ciudad</label>
+    <input name="city" required placeholder="Cali / Palmira">
+    <label>Universidad</label>
+    <input name="university" required placeholder="Universidad">
+    <label>Destino habitual</label>
+    <input name="destination" required placeholder="Campus / Edificio">
+    <label>Horario aproximado</label>
+    <input name="time" type="time" required>
+    <label>Barrio</label>
+    <input name="neighborhood" required placeholder="Ej: Valle del Lili">
+    <div class="form-actions">
+      <button class="btn" type="submit">Ingresar y ver panel</button>
+      <a class="btn ghost" href="{{ url_for('menu') }}">Cancelar</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <a class="back" href="{{ url_for('home_passenger', passenger_id=passenger_id) }}">← Volver</a>
+  <h2 class="title">📋 Mis Viajes Pedidos</h2>
+
+  {% if services %}
+    {% for s in services %}
+      {% set conductor = conductores | selectattr('id', 'equalto', s.driver_id) | first %}
+      <div class="trip card" style="margin: 10px 0; background: #3a3a3a; padding: 15px; border-radius: 10px;">
+        <h3>{{ conductor.name if conductor else 'Conductor desconocido' }}</h3>
+        <p><b>Vehículo:</b> {{ conductor.model if conductor else 'N/A' }}</p>
+        <p><b>Ruta:</b> {{ conductor.route if conductor else 'N/A' }}</p>
+        <p><b>Hora:</b> {{ s.time }}</p>
+        <p><b>Precio:</b> {{ s.price }}</p>
+        <p><b>Estado:</b> {{ s.state }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p style="color: #bbb; text-align:center;">🚫 No tienes viajes solicitados aún.</p>
+  {% endif %}
+</section>
+{% endblock %}

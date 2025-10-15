@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="splash">
+  <div class="splash-inner">
+  <img src="{{ url_for('static', filename='img/logo.png') }}" class="menu-logo" alt="GoTogether Logo">
+  </div>
+</section>
+<script>
+  setTimeout(()=> { window.location.href = "{{ url_for('menu') }}"; }, 2000);
+</script>
+{% endblock %}

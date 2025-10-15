@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="menu card">
+  <div class="menu-left">
+<img src="{{ url_for('static', filename='img/logo.png') }}" class="menu-logo" alt="GoTogether Logo">
+  </div>
+
+  <div class="menu-right">
+    <h2 class="menu-title">Bienvenido a <span style="color:#6a4cff;">GoTogether</span></h2>
+
+    <div class="vertical-actions">
+      <a class="big-btn" href="{{ url_for('register_driver') }}">Ingresar como Conductor 🚗</a>
+      <a class="big-btn ghost" href="{{ url_for('register_passenger') }}">Ingresar como Pasajero 🎒</a>
+      <a class="big-btn ghost" href="{{ url_for('directory') }}">Directorio 📋</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  body {
+    background: linear-gradient(180deg, #1e1e1e, #2a2a2a);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+  }
+
+  .menu.card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #2c2c2c;
+    border-radius: 15px;
+    padding: 40px;
+    margin: 60px auto;
+    width: 85%;
+    max-width: 1000px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  }
+
+  .menu-left {
+    flex: 1;
+    text-align: center;
+  }
+
+  .menu-logo {
+    width: 220px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #6a4cff);
+    animation: floatLogo 3s ease-in-out infinite;
+  }
+
+  @keyframes floatLogo {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+
+  .menu-right {
+    flex: 1;
+    text-align: center;
+  }
+
+  .menu-title {
+    font-size: 2.2em;
+    color: #fff;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+  }
+
+  .vertical-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .big-btn {
+    background-color: #6a4cff;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    width: 260px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(106,76,255,0.5);
+  }
+
+  .big-btn:hover {
+    background-color: #7a5eff;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(122,94,255,0.7);
+  }
+
+  .big-btn.ghost {
+    background-color: transparent;
+    border: 2px solid #6a4cff;
+  }
+
+  .big-btn.ghost:hover {
+    background-color: #6a4cff;
+  }
+
+  @media (max-width: 768px) {
+    .menu.card {
+      flex-direction: column;
+      padding: 30px 20px;
+    }
+
+    .menu-logo {
+      width: 160px;
+      margin-bottom: 25px;
+    }
+
+    .menu-title {
+      font-size: 1.7em;
+    }
+
+    .big-btn {
+      width: 220px;
+    }
+  }
+</style>
+{% endblock %}

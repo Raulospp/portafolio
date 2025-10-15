@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Viajes - GoTogether</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #1e1e1e;
+      color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #2c2c2c;
+      padding: 15px 25px;
+      border-bottom: 2px solid #6a4cff;
+    }
+
+    header h1 {
+      color: #6a4cff;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      background-color: #2c2c2c;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .trip-card {
+      background-color: #3a3a3a;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      transition: 0.3s;
+    }
+
+    .trip-card:hover {
+      background-color: #484848;
+    }
+
+    .trip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .passenger-name {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .trip-info {
+      font-size: 0.9em;
+      color: #ccc;
+      margin-bottom: 6px;
+    }
+
+    .price {
+      color: #6a4cff;
+      font-weight: 600;
+    }
+
+    .status {
+      font-size: 0.9em;
+      padding: 4px 8px;
+      border-radius: 6px;
+      color: #fff;
+      display: inline-block;
+    }
+
+    .status.pendiente { background-color: #1e90ff; }
+    .status.completado { background-color: #32cd32; }
+
+    button.complete-btn {
+      background-color: #6a4cff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 0.85em;
+      transition: 0.3s;
+    }
+
+    button.complete-btn:hover {
+      background-color: #7a5eff;
+    }
+
+    .no-trips {
+      text-align: center;
+      font-style: italic;
+      color: #aaa;
+      margin-top: 40px;
+    }
+
+    a.button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 16px;
+      background: #6a4cff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    a.button:hover {
+      background: #7a5eff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🚗 Mis Viajes</h1>
+    <a href="{{ url_for('menu') }}" class="button">Volver</a>
+  </header>
+
+  <div class="container">
+    {% if services %}
+      {% for s in services %}
+      <div class="trip-card">
+        <div class="trip-header">
+          <div class="passenger-name">
+            {% for p in pasajeros %}
+              {% if p.id == s.passenger_id %}
+                {{ p.name }}
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="status {{ s.state }}">{{ s.state|capitalize }}</div>
+        </div>
+
+        {% for p in pasajeros %}
+          {% if p.id == s.passenger_id %}
+            <div class="trip-info">Destino: {{ p.destination }} ({{ p.time }})</div>
+            <div class="trip-info">Barrio: {{ p.neighborhood }}, {{ p.city }}</div>
+          {% endif %}
+        {% endfor %}
+        <div class="trip-info">Hora programada: {{ s.time }}</div>
+        <div class="trip-info price">💰 {{ s.price }}</div>
+
+        {% if s.state != 'completado' %}
+        <form method="POST" action="{{ url_for('complete_service') }}" onsubmit="markComplete(event, {{ s.id }})">
+          <button class="complete-btn">Marcar como completado</button>
+        </form>
+        {% endif %}
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="no-trips">Aún no tienes viajes programados.</div>
+    {% endif %}
+  </div>
+
+  <script>
+    async function markComplete(e, id) {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("service_id", id);
+
+      const res = await fetch("{{ url_for('complete_service') }}", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+      if (data.status === "ok") {
+        alert("✅ Servicio marcado como completado");
+        window.location.reload();
+      }
+    }
+  </script>
+</body>
+</html>
